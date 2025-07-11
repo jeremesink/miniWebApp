@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Job Notifications</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 40px; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 8px; text-align: left; }
+        th { background-color: #f2f2f2; }
+    </style>
+</head>
+<body>
+    <h1>Job Notifications (Job Requests)</h1> {# Changed title for clarity #}
+    <table border="1">
+        <tr>
+            <th>Customer ID</th>
+            <th>SKU ID</th>
+            <th>Job Description</th>
+            <th>Job Cost</th>
+        </tr>
+        {% for job_request in notifications %} {# Renamed loop variable for clarity #}
+        <tr>
+            <td>{{ job_request.customer_id }}</td>
+            <td>{{ job_request.SKU_ID }}</td>
+            <td>{{ job_request.job_description }}</td>
+            <td>{{ job_request.job_cost }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <br>
+    <a href="/">Back to Home</a>
+</body>
+</html>

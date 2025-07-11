@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Submit a Bid</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 40px;
+            background-color: #f0f8ff;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            max-width: 500px;
+            margin: auto;
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        label {
+            display: block;
+            margin-top: 15px;
+        }
+        input, select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            width: 100%;
+            border-radius: 5px;
+        }
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #007BFF;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Submit a Bid</h1>
+
+    <form method="POST">
+        <label for="job_id">Job ID:</label>
+        <select name="job_id" id="job_id" required>
+            {% for id in job_ids %}
+            <option value="{{ id }}">{{ id }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="pros_id">Pros ID:</label>
+        <select name="pros_id" id="pros_id" required>
+            {% for id in pros_ids %}
+            <option value="{{ id }}">{{ id }}</option>
+            {% endfor %}
+        </select>
+
+        <label for="bid_amount">Bid Amount:</label>
+        <input type="number" step="0.01" name="bid_amount" id="bid_amount" required>
+
+        <label for="bid_status">Bid Status:</label>
+        <select name="bid_status" id="bid_status" required>
+            <option value="Pending">Pending</option>
+            <option value="Accepted">Accepted</option>
+            <option value="Rejected">Rejected</option>
+        </select>
+
+        <label for="bid_date">Bid Date:</label>
+        <input type="date" name="bid_date" id="bid_date" required>
+
+        <button type="submit">Submit Bid</button>
+    </form>
+
+    <a href="/">Back to Homepage</a>
+
+</body>
+</html>

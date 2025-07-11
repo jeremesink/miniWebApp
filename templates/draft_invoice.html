@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Draft Invoice</title>
+</head>
+<body>
+    <h1>Create a Draft Invoice</h1>
+
+    <form method="POST">
+        <label for="customer_id">Select Customer:</label>
+        <select name="customer_id" id="customer_id" required>
+            <option value="">-- Choose a Customer --</option>
+            {% for customer in customers %}
+                <option value="{{ customer['customer_id'] }}"
+                    {% if selected_customer_id == customer['customer_id']|string %}selected{% endif %}>
+                    {{ customer['business_name'] }}
+                </option>
+            {% endfor %}
+        </select>
+
+        <br><br>
+
+        <label for="description">Item Description:</label><br>
+        <input type="text" name="description" id="description" required><br><br>
+
+        <label for="cost">Cost (USD):</label><br>
+        <input type="number" step="0.01" name="cost" id="cost" required><br><br>
+
+        <button type="submit">Add to Draft Invoice</button>
+    </form>
+
+    {% if drafts %}
+    <h2>Current Draft for Customer ID {{ selected_customer_id }}</h2>
+    <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+        {% set total = 0 %}
+        {% for item in drafts %}
+            <div style="display: inline-block; white-space: nowrap; border: 1px solid #ccc; padding: 5px 10px; border-radius: 5px;">
+                ID: {{ item['invoice_id'] }} |
+                {{ item['description'] }} |
+                ${{ "%.2f"|format(item['cost']) }}
+            </div>
+            {% set total = total + item['cost'] %}
+        {% endfor %}
+    </div>
+    <p><strong>Total:</strong> ${{ "%.2f"|format(total) }}</p>
+{% endif %}
+</table>
+    <br>
+    <a href="/">Back to Home</a>
+    <a href="/view_invoices" class="button">View Invoices</a>
+
+
+</body>
+</html>

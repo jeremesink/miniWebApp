@@ -1,0 +1,25 @@
+<h1>All Draft Invoices</h1>
+
+<table border="1" cellpadding="5">
+    <tr>
+        <th>Invoice ID</th>
+        <th>Customer ID</th>
+        <th>Description</th>
+        <th>Cost</th>
+	<th>PDF</th>
+    </tr>
+    {% for invoice in invoices %}
+        <tr>
+            <td>{{ invoice['invoice_id'] }}</td>
+            <td>{{ invoice['customer_id'] }}</td>
+            <td>{{ invoice['description'] }}</td>
+            <td>${{ "%.2f"|format(invoice['cost']) }}</td>
+	    <td>
+                <a href="{{ url_for('static', filename='pdfs/invoice_' ~ invoice['invoice_id'] ~ '.pdf') }}"
+                   target="_blank">
+                   View PDF
+                </a>
+            </td>
+        </tr>
+    {% endfor %}
+</table>
